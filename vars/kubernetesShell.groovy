@@ -15,21 +15,21 @@ environment {
 
     stages {
         stage("POLL SCM"){
-		agent{label 'docker'}
+		agent{label 'docker-1'}
             		steps {
                 	checkout([$class: 'GitSCM', branches: [[name: "$gitBranch"]], extensions: [], userRemoteConfigs: [[credentialsId: "$gitCredId", url: "$gitRepo"]]])             
             		}
         } 
         
         stage('BUILD IMAGE') {
-		agent{label 'docker'}
+		agent{label 'docker-1'}
             		steps {
                 	sh 'docker build -t $registry:$dockerTag .'             
             		}
         }
         
         stage('PUSH HUB') { 
-		agent{label 'docker'}
+		agent{label 'docker-1'}
             		steps {
 			            sh 'docker push $registry:$dockerTag'                   	
                 	}    
