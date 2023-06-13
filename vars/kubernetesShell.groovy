@@ -1,8 +1,9 @@
-def call(String registryname = 'a', String docTag = 'a', String grepo = 'a', String gbranch = 'a', String gitcred = 'a', String depname = 'a', String contname = 'a') {
+def call(String registrycred= 'a',String registryname = 'a', String docTag = 'a', String grepo = 'a', String gbranch = 'a', String gitcred = 'a', String depname = 'a', String contname = 'a') {
 
 pipeline {
 environment { 
-    		registry = "${registryname}" 	
+	registrycredentials = "${registrycred}"
+	        registry = "${registryname}" 	
 		dockerTag = "${docTag}$BUILD_NUMBER"
 		gitRepo = "${grepo}"
 		gitBranch = "${gbranch}"
